@@ -7,14 +7,13 @@ class Questions():
     
     def __init__(self) :
         self.questionstorage = {}
-        self.numberquestion = 'question.csv'
+        self.numberquestion = 'questions.csv'
         self.getquestions(self.numberquestion)
 
 
-
-def getquestions(self,database) :  #method to obtains the questions from the file
+    def getquestions(self,database) :  #function to obtains the questions from the file
      with open(database) as csv_file:
-            csv_reader = csv.reader(csv_file, delimiter=',')
+            csv_reader = csv.reader(csv_file, delimiter=';')
             line_count = 0
             for row in csv_reader:
                 if line_count == 0:
@@ -23,32 +22,48 @@ def getquestions(self,database) :  #method to obtains the questions from the fil
                 else:
                     difficulty = int(row[0])
                     statement = row[1]
-                    option1 = row[2]
-                    option2 = row[3]
-                    option3 = row[4]
+                    wrong1 = row[2]
+                    wrong2 = row[3]
+                    wrong3 = row[4]
                     answer = row[5]
-                    currentQuestion = [statement, answer ,option1 , option2, option3]
+                    currentQuestion = [statement, wrong1 , wrong2, wrong3, answer]
                     if difficulty in self.questionstorage:
-                        self.questionstorage[difficulty].append(currentQuestion)
+                       self.questionstorage[difficulty].append(currentQuestion)
                     else:
-                        level = []
-                        level.append(currentQuestion)
-                        self.questionstorage[difficulty] = level
-                    line_count += 1
+                     level = []
+                     level.append(currentQuestion)
+                    self.questionstorage[difficulty] = level
+                line_count += 1
 
 
-
-def getramdonquestion(self, round):
+    def getramdonquestion(self, round):
      #method to get a ramdon question
 
         questionnumber = len(self.questionstorage[round])
         rq = random.randint(0, questionnumber-1)
+
         return self.questionstorage[round][rq]
+       
 
 
 
 
-def displayQuestion(Question):
+    
+
+    def congrats(self):
+
+     print("Congratulations you have won")
+
+
+    def displayCorrectanswer(self):
+        print("You have chosen the correct answer, you can advace, but it will get more difficult \n")
+
+    
+    def displaywronganswer(self):
+        print("You chose the wrong answer, you have lost everything")
+
+
+    def displayQuestion(self, Question):
         print(str(Question[0])+"\n")
         options = Question[1:]
         shuffle(options)
@@ -57,15 +72,3 @@ def displayQuestion(Question):
         userInput = input("Write the option you think it is the correct one: ")
 
         return userInput
-
-def congrats():
-
-    print("Congratulations you have won")
-
-
-def displayCorrectanswer():
-        print("You have chosen the correct answer, you can advace, but it will get more difficult \n")
-
-    
-def displaywronganswer():
-        print("You chose the wrong answer, you have lost everything")
