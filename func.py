@@ -14,7 +14,7 @@ class Game:
         print(self.round)
     
     def playGame(self):
-        #Initiates the game and controls the flow the game, telling the game which round should be played
+        
 
         while(self.round <= 5):
             newQuestion = self.quest.getramdonquestion(self.round)
@@ -23,7 +23,7 @@ class Game:
             if(checkPass==True):
                 self.quest.displayCorrectanswer()
                 self.updateScore(self.round)
-                self.savePlayerScore(self.player)
+                self.savePlayerScore(self.play)
                 continue
 
             else:
@@ -34,16 +34,16 @@ class Game:
         self.quest.congrats()
             
     def checkQuestion(self, question, userInput):
-        #Checks if question is answered correctly
+       
         
-        if(question[1] == userInput):
+        if(question[4] == userInput):
             self.round += 1
             return True
         else:
             return False
 
     def updateScore(self, round):
-        #Updates player score
+       
 
         if(round == 5):
             self.score += 10000
@@ -52,12 +52,12 @@ class Game:
             print(self.score, self.round, self.userName)
     
     def resetScore(self):
-        #Resets player score to the first level
+       
 
         self.score = 0
         self.round = 1
         
     def savePlayerScore(self, player):
-        #Conection to player object, updates the info on that object
+        
 
         player.savePlayerInfo(self.userName, self.score, self.round)

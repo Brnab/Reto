@@ -3,8 +3,7 @@ from Players import Player
 from func import Game
 from Question import Questions
 
-#Initiates game asking the user to give the username and type of user, then it just creates a new game and
-#the flow is controlled by the game object
+
 
 questions = Questions()
 player = Player()
